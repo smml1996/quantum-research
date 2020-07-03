@@ -1,0 +1,1272 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ReduceToSat}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{import} \PY{n}{visualization}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{visualization} \PY{k}{import} \PY{n}{plot\PYZus{}histogram}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{providers}\PY{n+nn}{.}\PY{n+nn}{aer} \PY{k}{import} \PY{n}{QasmSimulator}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k}{import} \PY{n}{IBMQ}
+        \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{sqrt}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{import} \PY{n+nn}{networkx} \PY{k}{as} \PY{n+nn}{nx}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \hypertarget{read-graph}{%
+\section{Read Graph}\label{read-graph}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{read\PYZus{}graph}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{:}
+            \PY{n}{num\PYZus{}vertices} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{num\PYZus{}edges} \PY{o}{=} \PY{l+m+mi}{0} 
+            \PY{n}{list\PYZus{}edges} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{name} \PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{file}\PY{p}{:}
+                \PY{n}{tokens} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+                \PY{k}{if}\PY{p}{(}\PY{n}{tokens}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{}this line is a comment}
+                    \PY{k}{continue}
+                \PY{k}{elif}\PY{p}{(}\PY{n}{tokens}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p}\PY{l+s+s2}{\PYZdq{}}\PY{o+ow}{and} \PY{n}{tokens}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{edge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} save number of vertices and edges}
+                    \PY{n}{num\PYZus{}vertices} \PY{o}{=} \PY{n}{tokens}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+                    \PY{n}{num\PYZus{}edges} \PY{o}{=} \PY{n}{tokens}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} this is a line describing an edge}
+                    \PY{n}{temp} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{tokens}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{tokens}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+                    \PY{n}{list\PYZus{}edges}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+            \PY{n}{file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n+nb}{int}\PY{p}{(}\PY{n}{num\PYZus{}vertices}\PY{p}{)}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{num\PYZus{}edges}\PY{p}{)}\PY{p}{,} \PY{n}{list\PYZus{}edges}
+\end{Verbatim}
+
+
+    \hypertarget{reduce-to-sat}{%
+\section{Reduce to SAT}\label{reduce-to-sat}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{reduce\PYZus{}to\PYZus{}SAT}\PY{p}{(}\PY{n}{nv}\PY{p}{,} \PY{n}{ne}\PY{p}{,} \PY{n}{ledges}\PY{p}{,} \PY{n}{k\PYZus{}colors}\PY{p}{)}\PY{p}{:}
+            
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}vertex\PYZus{}color\PYZus{}repr}\PY{p}{(}\PY{n}{vertex}\PY{p}{)}\PY{p}{:}
+                \PY{n}{temp} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{n}{k\PYZus{}colors}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{temp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{k\PYZus{}colors}\PY{o}{*}\PY{n}{vertex} \PY{o}{\PYZhy{}} \PY{n}{i}\PY{p}{)}
+                \PY{k}{return} \PY{n}{temp}
+            
+            
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}vertex\PYZus{}contraints}\PY{p}{(}\PY{n}{vertex}\PY{p}{)}\PY{p}{:}
+                \PY{n}{constraints} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{vertex\PYZus{}color\PYZus{}repr} \PY{o}{=} \PY{n}{get\PYZus{}vertex\PYZus{}color\PYZus{}repr}\PY{p}{(}\PY{n}{vertex}\PY{p}{)}
+                \PY{n}{temp} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{c+c1}{\PYZsh{} select at least one color}
+                \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{vertex\PYZus{}color\PYZus{}repr}\PY{p}{:} 
+                    \PY{c+c1}{\PYZsh{}temp += str(c) + \PYZdq{} \PYZdq{}}
+                    \PY{n}{temp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}temp+=\PYZdq{}0\PYZdq{}}
+                \PY{n}{constraints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp}\PY{p}{)}\PY{p}{;}
+                
+                \PY{c+c1}{\PYZsh{}select at most one color}
+                \PY{k}{for} \PY{n}{c1} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{vertex\PYZus{}color\PYZus{}repr}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{c2} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{c1}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vertex\PYZus{}color\PYZus{}repr}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{temp} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                        \PY{n}{temp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{vertex\PYZus{}color\PYZus{}repr}\PY{p}{[}\PY{n}{c1}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{temp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{vertex\PYZus{}color\PYZus{}repr}\PY{p}{[}\PY{n}{c2}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{constraints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+                \PY{k}{return} \PY{n}{constraints}
+            
+            
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}edge\PYZus{}constraints}\PY{p}{(}\PY{n}{v1}\PY{p}{,} \PY{n}{v2}\PY{p}{)}\PY{p}{:}
+                \PY{n}{constraints} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{v1\PYZus{}color\PYZus{}repr} \PY{o}{=} \PY{n}{get\PYZus{}vertex\PYZus{}color\PYZus{}repr}\PY{p}{(}\PY{n}{v1}\PY{p}{)}
+                \PY{n}{v2\PYZus{}color\PYZus{}repr} \PY{o}{=} \PY{n}{get\PYZus{}vertex\PYZus{}color\PYZus{}repr}\PY{p}{(}\PY{n}{v2}\PY{p}{)}
+                
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{v1\PYZus{}color\PYZus{}repr}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{temp} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n}{temp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{v1\PYZus{}color\PYZus{}repr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{temp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{v2\PYZus{}color\PYZus{}repr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}constraints.append(\PYZdq{}\PYZhy{}\PYZdq{} + str(v1\PYZus{}color\PYZus{}repr[i]) + \PYZdq{} \PYZhy{}\PYZdq{} + str(v2\PYZus{}color\PYZus{}repr[i]) + \PYZdq{} 0\PYZdq{})}
+                    \PY{n}{constraints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+                \PY{k}{return} \PY{n}{constraints}
+                        
+            \PY{n}{buffer} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{}buffer.append(\PYZdq{}p cnf \PYZdq{} + str(nv*k\PYZus{}colors) + \PYZdq{} \PYZdq{} + str(ne*k\PYZus{}colors + nv*int(1 +( k\PYZus{}colors * (k\PYZus{}colors\PYZhy{}1) )/2 ) ))}
+            \PY{n}{num\PYZus{}variables} \PY{o}{=} \PY{n}{nv}\PY{o}{*}\PY{n}{k\PYZus{}colors}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{nv}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{buffer}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{get\PYZus{}vertex\PYZus{}contraints}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{ledges}\PY{p}{:}
+                \PY{n}{buffer}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{get\PYZus{}edge\PYZus{}constraints}\PY{p}{(}\PY{n}{e}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{e}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{buffer}\PY{p}{,} \PY{n}{num\PYZus{}variables}
+\end{Verbatim}
+
+
+    \hypertarget{grover-algorithm-utils-non-standard-gates}{%
+\section{Grover Algorithm Utils (Non-Standard
+Gates)}\label{grover-algorithm-utils-non-standard-gates}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{n\PYZus{}controlled\PYZus{}X}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{controls}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{ancillas}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{controls}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{k}{pass}
+            \PY{k}{elif} \PY{n+nb}{len}\PY{p}{(}\PY{n}{controls}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+            \PY{k}{elif} \PY{n+nb}{len}\PY{p}{(}\PY{n}{controls}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} compute}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} copy}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{ancillas}\PY{p}{[}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} uncompute}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{n\PYZus{}controlled\PYZus{}Z}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{controls}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{ancillas}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Implement a Z gate with multiple controls\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{}if (len(controls) \PYZgt{} 2):}
+            \PY{c+c1}{\PYZsh{}    raise ValueError(\PYZsq{}The controlled Z with more than 2 \PYZsq{} +}
+            \PY{c+c1}{\PYZsh{}                     \PYZsq{}controls is not implemented\PYZsq{})}
+            \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{controls}\PY{p}{)}
+            \PY{k}{if}\PY{p}{(}\PY{n}{n} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+            \PY{k}{elif} \PY{p}{(}\PY{n}{n} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+            \PY{k}{elif} \PY{p}{(}\PY{n}{n} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} copy}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{ancillas}\PY{p}{[}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} uncompute}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{controls}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} 
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{grover-algorithm-steps}{%
+\section{Grover Algorithm Steps}\label{grover-algorithm-steps}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{initialize}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}in}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}(n+1)\PYZhy{}qubit input state for Grover search.\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+            \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+            \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{oracle}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}in}\PY{p}{,} \PY{n}{q\PYZus{}out}\PY{p}{,} \PY{n}{aux}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{formula}\PY{p}{,} \PY{n}{ancillas}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n}{num\PYZus{}clauses} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{formula}\PY{p}{)}
+            \PY{k}{for} \PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{clause}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{formula}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} This loop ensures aux[k] is 1 if an odd number of literals}
+                \PY{c+c1}{\PYZsh{} are true}
+                \PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{literal} \PY{o+ow}{in} \PY{n}{clause}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{literal} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{circuit}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{aux}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{circuit}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{aux}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Flip aux[k] if all literals are true, using auxiliary qubit}
+                \PY{c+c1}{\PYZsh{} (ancilla) aux[num\PYZus{}clauses]}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{n\PYZus{}controlled\PYZus{}X}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{p}{,} \PY{n}{aux}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{p}{)}\PY{p}{)}
+                \PY{k}{for} \PY{n}{literal} \PY{o+ow}{in} \PY{n}{clause}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{literal} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} The formula is satisfied if and only if all auxiliary qubits}
+            \PY{c+c1}{\PYZsh{} except aux[num\PYZus{}clauses] are 1}
+            \PY{n}{n\PYZus{}controlled\PYZus{}X}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{aux}\PY{p}{,} \PY{n}{q\PYZus{}out}\PY{p}{,} \PY{n}{ancillas}\PY{p}{,} \PY{n}{num\PYZus{}clauses}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Flip back any auxiliary qubits to make sure state is consistent}
+            \PY{c+c1}{\PYZsh{} for future executions of this routine; same loop as above.}
+            \PY{k}{for} \PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{clause}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{formula}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} This loop ensures aux[k] is 1 if an odd number of literals}
+                \PY{c+c1}{\PYZsh{} are true}
+                \PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{literal} \PY{o+ow}{in} \PY{n}{clause}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{literal} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{circuit}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{aux}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{circuit}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{aux}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Flip aux[k] if all literals are true, using auxiliary qubit}
+                \PY{c+c1}{\PYZsh{} (ancilla) aux[num\PYZus{}clauses]}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{n\PYZus{}controlled\PYZus{}X}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{p}{,} \PY{n}{aux}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{q\PYZus{}literals\PYZus{}in\PYZus{}clause}\PY{p}{)}\PY{p}{)}
+                \PY{k}{for} \PY{n}{literal} \PY{o+ow}{in} \PY{n}{clause}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{literal} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{literal}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{inversion\PYZus{}about\PYZus{}average}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}in}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{ancillas}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Apply inversion about the average step of Grover\PYZsq{}s algorithm.\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+             \PY{n}{n\PYZus{}controlled\PYZus{}Z}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{p}{[}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ancillas}\PY{p}{)}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{circuit}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{circuit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}reads}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}in}\PY{p}{,} \PY{n}{cr}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{circuit}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{cr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{estimate\PYZus{}ancilla\PYZus{}usage}\PY{p}{(}\PY{n}{num\PYZus{}variables}\PY{p}{,} \PY{n}{clauses}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{num\PYZus{}variables}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{clauses}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{grover}\PY{p}{(}\PY{n}{clauses}\PY{p}{,} \PY{n}{num\PYZus{}variables}\PY{p}{,} \PY{n}{simulated}\PY{p}{,}\PY{n}{backend\PYZus{}name} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ibmq\PYZus{}16\PYZus{}melbourne}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{extra\PYZus{}iters} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{n}{circuit} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{p}{)}
+             \PY{n}{q\PYZus{}in} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{n}{num\PYZus{}variables}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{var}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{q\PYZus{}out} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{aux} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{clauses}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{ancillas} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{if}\PY{p}{(}\PY{n}{estimate\PYZus{}ancilla\PYZus{}usage}\PY{p}{(}\PY{n}{num\PYZus{}variables}\PY{p}{,} \PY{n}{clauses}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ancillas} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{n}{estimate\PYZus{}ancilla\PYZus{}usage}\PY{p}{(}\PY{n}{num\PYZus{}variables}\PY{p}{,} \PY{n}{clauses}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{circuit}\PY{o}{.}\PY{n}{add\PYZus{}register}\PY{p}{(}\PY{n}{ancillas}\PY{p}{)}
+             \PY{n}{cr} \PY{o}{=} \PY{n}{ClassicalRegister}\PY{p}{(}\PY{n}{num\PYZus{}variables}\PY{p}{)}
+             \PY{n}{circuit}\PY{o}{.}\PY{n}{add\PYZus{}register}\PY{p}{(}\PY{n}{q\PYZus{}in}\PY{p}{)}
+             \PY{n}{circuit}\PY{o}{.}\PY{n}{add\PYZus{}register}\PY{p}{(}\PY{n}{q\PYZus{}out}\PY{p}{)}
+             \PY{n}{circuit}\PY{o}{.}\PY{n}{add\PYZus{}register}\PY{p}{(}\PY{n}{aux}\PY{p}{)}
+             \PY{n}{circuit}\PY{o}{.}\PY{n}{add\PYZus{}register}\PY{p}{(}\PY{n}{cr}\PY{p}{)}
+             \PY{n}{initialize}\PY{p}{(}\PY{n}{circuit}\PY{p}{,}\PY{n}{q\PYZus{}in}\PY{p}{,} \PY{n}{q\PYZus{}out}\PY{p}{,} \PY{n}{num\PYZus{}variables}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{num\PYZus{}variables}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{n}{extra\PYZus{}iters}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{oracle}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}in}\PY{p}{,} \PY{n}{q\PYZus{}out}\PY{p}{,} \PY{n}{aux}\PY{p}{,} \PY{n}{num\PYZus{}variables}\PY{p}{,} \PY{n}{clauses}\PY{p}{,} \PY{n}{ancillas}\PY{p}{)}
+                 \PY{n}{inversion\PYZus{}about\PYZus{}average}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}in}\PY{p}{,} \PY{n}{num\PYZus{}variables}\PY{p}{,} \PY{n}{ancillas}\PY{p}{)}
+             \PY{n}{make\PYZus{}reads}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{q\PYZus{}in}\PY{p}{,} \PY{n}{cr}\PY{p}{,} \PY{n}{num\PYZus{}variables}\PY{p}{)}
+             \PY{n}{result} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{if} \PY{n}{simulated}\PY{p}{:}
+                 \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{result} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{QasmSimulator}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{1024}\PY{p}{)}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{elapsed\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{provider} \PY{o}{=} \PY{n}{IBMQ}\PY{o}{.}\PY{n}{load\PYZus{}account}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{backend} \PY{o}{=} \PY{n}{provider}\PY{o}{.}\PY{n}{get\PYZus{}backend}\PY{p}{(}\PY{n}{backend\PYZus{}name}\PY{p}{)}
+                 \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{result} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{circuit}\PY{p}{,} \PY{n}{backend}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{1024}\PY{p}{)}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{elapsed\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{execution time: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{elapsed\PYZus{}time}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{result}
+\end{Verbatim}
+
+
+    \hypertarget{solving-k-coloring}{%
+\section{Solving K-Coloring}\label{solving-k-coloring}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{simulated}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{backend\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ibmq\PYZus{}16\PYZus{}melbourne}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{extra\PYZus{}iters} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{processing }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{name}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{... }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{nv}\PY{p}{,} \PY{n}{ne}\PY{p}{,} \PY{n}{le} \PY{o}{=} \PY{n}{read\PYZus{}graph}\PY{p}{(}\PY{n}{name}\PY{p}{)}
+             \PY{n}{clauses}\PY{p}{,} \PY{n}{num\PYZus{}variables} \PY{o}{=} \PY{n}{reduce\PYZus{}to\PYZus{}SAT}\PY{p}{(}\PY{n}{nv}\PY{p}{,} \PY{n}{ne}\PY{p}{,} \PY{n}{le}\PY{p}{,} \PY{n}{k}\PY{p}{)}
+             \PY{k}{return} \PY{n}{grover}\PY{p}{(}\PY{n}{clauses}\PY{p}{,} \PY{n}{num\PYZus{}variables}\PY{p}{,}\PY{n}{simulated}\PY{p}{,}\PY{n}{backend\PYZus{}name}\PY{o}{=}\PY{n}{backend\PYZus{}name}\PY{p}{,} \PY{n}{extra\PYZus{}iters}\PY{o}{=}\PY{n}{extra\PYZus{}iters}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{utils}{%
+\section{Utils}\label{utils}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{draw\PYZus{}graph}\PY{p}{(}\PY{n}{name}\PY{p}{,}\PY{n}{coloring} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{n}{nv}\PY{p}{,} \PY{n}{ne}\PY{p}{,} \PY{n}{le} \PY{o}{=} \PY{n}{read\PYZus{}graph}\PY{p}{(}\PY{n}{name}\PY{p}{)}
+             \PY{n}{G} \PY{o}{=} \PY{n}{nx}\PY{o}{.}\PY{n}{Graph}\PY{p}{(}\PY{p}{)}
+             \PY{n}{G}\PY{o}{.}\PY{n}{add\PYZus{}nodes\PYZus{}from}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nv}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{n}{G}\PY{o}{.}\PY{n}{add\PYZus{}edges\PYZus{}from}\PY{p}{(}\PY{n}{le}\PY{p}{)}
+             \PY{k}{if} \PY{o+ow}{not} \PY{p}{(}\PY{n}{coloring} \PY{o}{==} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{nx}\PY{o}{.}\PY{n}{draw\PYZus{}circular}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{n}{with\PYZus{}labels}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{node\PYZus{}color}\PY{o}{=}\PY{n}{node\PYZus{}colors}\PY{p}{,} \PY{n}{node\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{3000}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{nx}\PY{o}{.}\PY{n}{draw\PYZus{}circular}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{n}{with\PYZus{}labels}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{node\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{3000}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{getQubitNum}\PY{p}{(}\PY{n}{graph\PYZus{}name}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+             \PY{n}{nv}\PY{p}{,} \PY{n}{ne}\PY{p}{,} \PY{n}{le} \PY{o}{=} \PY{n}{read\PYZus{}graph}\PY{p}{(}\PY{n}{graph\PYZus{}name}\PY{p}{)}
+             \PY{n}{clauses}\PY{p}{,} \PY{n}{num\PYZus{}variables} \PY{o}{=} \PY{n}{reduce\PYZus{}to\PYZus{}SAT}\PY{p}{(}\PY{n}{nv}\PY{p}{,} \PY{n}{ne}\PY{p}{,} \PY{n}{le}\PY{p}{,} \PY{n}{k}\PY{p}{)}
+             \PY{n}{ans} \PY{o}{=} \PY{n}{num\PYZus{}variables} \PY{o}{+} \PY{l+m+mi}{1} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{clauses}\PY{p}{)} \PY{o}{+} \PY{n}{estimate\PYZus{}ancilla\PYZus{}usage}\PY{p}{(}\PY{n}{num\PYZus{}variables}\PY{p}{,} \PY{n}{clauses}\PY{p}{)}
+             \PY{k}{return} \PY{n}{ans}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{getGateCount}\PY{p}{(}\PY{n}{graph\PYZus{}name}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{xz\PYZus{}gate\PYZus{}count}\PY{p}{(}\PY{n}{len\PYZus{}controls}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{len\PYZus{}controls} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{:}
+                     \PY{k}{return} \PY{l+m+mi}{3}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return}  \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{len\PYZus{}controls} \PY{o}{+} \PY{l+m+mi}{2}
+             \PY{k}{def} \PY{n+nf}{init\PYZus{}count}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{n} \PY{o}{+} \PY{l+m+mi}{2}
+             
+             \PY{k}{def} \PY{n+nf}{oracle\PYZus{}count}\PY{p}{(}\PY{n}{formula}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ans}  \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{for} \PY{n}{clause} \PY{o+ow}{in} \PY{n}{formula}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{literal} \PY{o+ow}{in} \PY{n}{clause}\PY{p}{:}
+                         \PY{k}{if} \PY{n}{literal} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                             \PY{n}{ans}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{2}
+                         \PY{k}{else}\PY{p}{:}
+                             \PY{n}{ans}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                             
+                     \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{clause}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{:}
+                         \PY{n}{ans}\PY{o}{+}\PY{o}{=}\PY{n}{xz\PYZus{}gate\PYZus{}count}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{clause}\PY{p}{)}\PY{p}{)}
+                     
+                     \PY{k}{for} \PY{n}{literal} \PY{o+ow}{in} \PY{n}{clause}\PY{p}{:}
+                         \PY{k}{if} \PY{n}{literal} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                             \PY{n}{ans}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}   
+                 \PY{n}{ans}\PY{o}{*}\PY{o}{=}\PY{l+m+mi}{2}
+                 
+                 \PY{n}{ans}\PY{o}{+}\PY{o}{=}\PY{n}{xz\PYZus{}gate\PYZus{}count}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{formula}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{k}{return} \PY{n}{ans}
+             
+             \PY{k}{def} \PY{n+nf}{inversion\PYZus{}count}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{n} \PY{o}{+} \PY{n}{xz\PYZus{}gate\PYZus{}count}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{k}{def} \PY{n+nf}{grover\PYZus{}count}\PY{p}{(}\PY{n}{clauses}\PY{p}{,} \PY{n}{num\PYZus{}variables}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ans} \PY{o}{=} \PY{n}{init\PYZus{}count}\PY{p}{(}\PY{n}{num\PYZus{}variables}\PY{p}{)} \PY{o}{+} \PY{n}{oracle\PYZus{}count}\PY{p}{(}\PY{n}{clauses}\PY{p}{)} \PY{o}{+} \PY{n}{inversion\PYZus{}count}\PY{p}{(}\PY{n}{num\PYZus{}variables}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{ans}
+                     
+             \PY{n}{nv}\PY{p}{,} \PY{n}{ne}\PY{p}{,} \PY{n}{le} \PY{o}{=} \PY{n}{read\PYZus{}graph}\PY{p}{(}\PY{n}{graph\PYZus{}name}\PY{p}{)}
+             \PY{n}{clauses}\PY{p}{,} \PY{n}{num\PYZus{}variables} \PY{o}{=} \PY{n}{reduce\PYZus{}to\PYZus{}SAT}\PY{p}{(}\PY{n}{nv}\PY{p}{,} \PY{n}{ne}\PY{p}{,} \PY{n}{le}\PY{p}{,} \PY{n}{k}\PY{p}{)}
+             \PY{n}{gate\PYZus{}count} \PY{o}{=} \PY{n}{grover\PYZus{}count}\PY{p}{(}\PY{n}{clauses}\PY{p}{,} \PY{n}{num\PYZus{}variables}\PY{p}{)}
+             \PY{k}{return} \PY{n}{gate\PYZus{}count}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{is\PYZus{}coloring\PYZus{}valid}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{nv}\PY{p}{,} \PY{n}{le}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+             \PY{n}{map\PYZus{}colors} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+             \PY{n}{color} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{vertex\PYZus{}colors} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             
+             \PY{n}{temp} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{count\PYZus{}zeros} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{temp}\PY{o}{+}\PY{o}{=} \PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{count\PYZus{}zeros}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                 \PY{n}{c}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{c} \PY{o}{==} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+                     
+                     \PY{k}{if} \PY{n}{count\PYZus{}zeros} \PY{o}{==} \PY{n}{k}\PY{p}{:}
+                         \PY{k}{return} \PY{k+kc}{False}
+                     \PY{k}{if} \PY{n}{k}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{!=} \PY{n}{count\PYZus{}zeros} \PY{p}{:}
+                         \PY{k}{return} \PY{k+kc}{False}
+             
+                     \PY{k}{if} \PY{n}{temp} \PY{o+ow}{in} \PY{n}{map\PYZus{}colors}\PY{p}{:}
+                         \PY{n}{vertex\PYZus{}colors}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{map\PYZus{}colors}\PY{p}{[}\PY{n}{temp}\PY{p}{]}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{map\PYZus{}colors}\PY{p}{[}\PY{n}{temp}\PY{p}{]} \PY{o}{=} \PY{n}{color}
+                         \PY{n}{vertex\PYZus{}colors}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{color}\PY{p}{)}
+                         \PY{n}{color}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                     \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{n}{temp} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+                     \PY{n}{count\PYZus{}zeros} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{le}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{vertex\PYZus{}colors}\PY{p}{[}\PY{n}{e}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{n}{vertex\PYZus{}colors}\PY{p}{[}\PY{n}{e}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                     \PY{k}{return} \PY{k+kc}{False}
+             \PY{k}{return} \PY{k+kc}{True}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{getAccuracy}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{counts}\PY{p}{,} \PY{n}{graph\PYZus{}name}\PY{p}{)}\PY{p}{:}
+             \PY{n}{nv}\PY{p}{,} \PY{n}{ne}\PY{p}{,} \PY{n}{le} \PY{o}{=} \PY{n}{read\PYZus{}graph}\PY{p}{(}\PY{n}{graph\PYZus{}name}\PY{p}{)}
+             \PY{n}{ans} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n}{counts}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{is\PYZus{}coloring\PYZus{}valid}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{nv}\PY{p}{,} \PY{n}{le}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{ans}\PY{o}{+}\PY{o}{=}\PY{n}{counts}\PY{p}{[}\PY{n}{s}\PY{p}{]}
+             \PY{k}{return} \PY{n}{ans}\PY{o}{/}\PY{l+m+mf}{1024.0}
+             
+\end{Verbatim}
+
+
+    \hypertarget{test-0}{%
+\section{Test 0:}\label{test-0}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}296}]:} \PY{n}{result} \PY{o}{=} \PY{n}{grover}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+execution time:  0.1389460563659668
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}297}]:} \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}297}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \hypertarget{test-1}{%
+\section{Test 1}\label{test-1}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}370}]:} \PY{n}{draw\PYZus{}graph}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph1.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}340}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Qubit usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getQubitNum}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph1.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Qubit usage:  6
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}391}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gate count: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{getGateCount}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph1.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gate count:  18
+
+    \end{Verbatim}
+
+    \hypertarget{quantum-computer-results}{%
+\subsubsection{Quantum Computer
+Results}\label{quantum-computer-results}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}319}]:} \PY{n}{result}\PY{o}{=} \PY{n}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph1.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{extra\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{} +2}
+          \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+processing  graph1.txt {\ldots} 
+execution time:  578.6188752651215
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}319}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{result}\PY{o}{=} \PY{n}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph1.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{extra\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{} +2}
+         \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+processing  graph1.txt {\ldots} 
+execution time:  0.09783196449279785
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}20}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{getAccuracy}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{answer}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph1.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{quantum-simulator-results}{%
+\subsubsection{Quantum Simulator
+Results}\label{quantum-simulator-results}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}358}]:} \PY{n}{result}\PY{o}{=} \PY{n}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph1.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{extra\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)} 
+          \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+processing  graph1.txt {\ldots} 
+execution time:  0.09282612800598145
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}359}]:} \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}359}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \hypertarget{test-2}{%
+\section{Test 2}\label{test-2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}371}]:} \PY{n}{draw\PYZus{}graph}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph2.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}372}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Qubit usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getQubitNum}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph2.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Qubit usage:  16
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}392}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gate count: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{getGateCount}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph2.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gate count:  128
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{result} \PY{o}{=} \PY{n}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph2.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{extra\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+processing  graph2.txt {\ldots} 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:26: DeprecationWarning: Accessing a bit register by bit[0] or its index by bit[1] is deprecated. Go for bit.register and bit.index.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+execution time:  0.4106600284576416
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}39}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{getAccuracy}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{answer}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph2.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1000 False
+0110 True
+1011 False
+1101 False
+0010 False
+1110 False
+0001 False
+0000 False
+0100 False
+1100 False
+0101 False
+1001 True
+1111 False
+1010 False
+0111 False
+0011 False
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} 0.2724609375
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}265}]:} \PY{n}{maximum} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{answer}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{answer}\PY{o}{.}\PY{n}{get}\PY{p}{)}  
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{maximum}\PY{p}{,} \PY{n}{answer}\PY{p}{[}\PY{n}{maximum}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1001 260
+
+    \end{Verbatim}
+
+    \hypertarget{test-3}{%
+\section{Test 3}\label{test-3}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}373}]:} \PY{n}{draw\PYZus{}graph}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph3.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}375}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Qubit usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getQubitNum}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph3.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Qubit usage:  9
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}395}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gate usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getGateCount}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph3.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gate usage:  28
+
+    \end{Verbatim}
+
+    \hypertarget{quantum-results}{%
+\subsection{Quantum Results}\label{quantum-results}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{result}\PY{o}{=} \PY{n}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph3.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{k+kc}{False}\PY{p}{,} \PY{n}{extra\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{} +2}
+        \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+processing  graph3.txt {\ldots} 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/qiskit/providers/ibmq/ibmqfactory.py:181: UserWarning: Credentials are already in use. The existing account in the session will be replaced.
+  warnings.warn('Credentials are already in use. The existing '
+Error checking job status using websocket, retrying using HTTP.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{getAccuracy}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{answer}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph1.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{simulator-results}{%
+\subsection{Simulator Results}\label{simulator-results}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}320}]:} \PY{n}{result} \PY{o}{=} \PY{n}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph3.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+processing  graph3.txt {\ldots} 
+execution time:  0.06365418434143066
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}320}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}321}]:} \PY{n}{result} \PY{o}{=} \PY{n}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph3.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+processing  graph3.txt {\ldots} 
+execution time:  0.6794078350067139
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}321}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{n}{maximum} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{answer}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{answer}\PY{o}{.}\PY{n}{get}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{maximum}\PY{p}{,} \PY{n}{answer}\PY{p}{[}\PY{n}{maximum}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+010101 85
+
+    \end{Verbatim}
+
+    \hypertarget{test-4}{%
+\section{Test 4}\label{test-4}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}376}]:} \PY{n}{draw\PYZus{}graph}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph4.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}377}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Qubit usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getQubitNum}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph4.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Qubit usage:  22
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}396}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gate usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getGateCount}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph4.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gate usage:  170
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{n}{result} \PY{o}{=} \PY{n}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph4.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+num. ancillas:  (5, 7)
+num. ancillas:  (5, 7)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:25: DeprecationWarning: Accessing a bit register by bit[0] or its index by bit[1] is deprecated. Go for bit.register and bit.index.
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}162}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{n}{maximum} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{answer}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{answer}\PY{o}{.}\PY{n}{get}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{maximum}\PY{p}{,} \PY{n}{answer}\PY{p}{[}\PY{n}{maximum}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+101001 41
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{result} \PY{o}{=} \PY{n}{search\PYZus{}k\PYZus{}coloring}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph4.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{answer} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{answer}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+processing  graph4.txt {\ldots} 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:26: DeprecationWarning: Accessing a bit register by bit[0] or its index by bit[1] is deprecated. Go for bit.register and bit.index.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+execution time:  5.009613275527954
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}54}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{getAccuracy}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{answer}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{graph4.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} 0.0771484375
+\end{Verbatim}
+            
+    \hypertarget{test-5}{%
+\section{Test 5}\label{test-5}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}378}]:} \PY{n}{draw\PYZus{}graph}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph5.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}379}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Qubit usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getQubitNum}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph5.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Qubit usage:  45
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}397}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gate usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getGateCount}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph5.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gate usage:  421
+
+    \end{Verbatim}
+
+    \hypertarget{test-6}{%
+\section{Test 6}\label{test-6}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}380}]:} \PY{n}{draw\PYZus{}graph}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph6.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}381}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Qubit usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getQubitNum}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph6.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Qubit usage:  28
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}398}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gate usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getGateCount}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph6.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gate usage:  212
+
+    \end{Verbatim}
+
+    \hypertarget{test-7}{%
+\section{Test 7}\label{test-7}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}383}]:} \PY{n}{draw\PYZus{}graph}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_72_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}385}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Qubit usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getQubitNum}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Qubit usage:  358
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}399}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gate usage: }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{getGateCount}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gate usage:  3474
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

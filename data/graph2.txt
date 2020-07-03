@@ -1,0 +1,4 @@
+c FILE: dataset2
+c ans 2
+p edge 2 1
+e 1 2
